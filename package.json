@@ -1,0 +1,21 @@
+{
+  "name": "tetris",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "concurrently --raw 'esbuild src/index.js --bundle --minify --sourcemap --format=iife --outfile=docs/app.js --watch' 'http-server docs -c-1'",
+    "build": "rm -rf docs/app.* && esbuild src/index.js --bundle --minify --sourcemap --format=iife --outfile=docs/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.0",
+    "esbuild": "^0.19.0",
+    "http-server": "^14.1.1"
+  }
+}
