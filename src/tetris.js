@@ -689,10 +689,11 @@ addEventListener(
   function (e) {
     if (!watchingReplay) {
 
-      // Game over screen: Shortcut to play again
-      if (state.gameState === 9 && e.keyCode === 13) {
-        // Enter
-        init(state.gametype)
+      // Enter key
+      if (e.keyCode === 13) {
+        // Game over screen: Shortcut to play again
+        if (state.paused) return unpause()
+        if (state.gameState === 9) return init(state.gametype)
       }
 
       if (e.keyCode === binds.moveLeft && keysDown & flags.moveLeft) {
@@ -763,13 +764,13 @@ function update() {
   if (gametype !== 3) {
     if (state.lines >= lineLimit) {
       state.gameState = 1
-      msg.innerHTML = 'GREAT!'
+      msg.innerHTML = 'YOU WIN!'
       menu(3)
     }
   } else {
     if (state.digLines.length === 0) {
       state.gameState = 1
-      msg.innerHTML = 'GREAT!'
+      msg.innerHTML = 'YOU WIN!'
       menu(3)
     }
   }
